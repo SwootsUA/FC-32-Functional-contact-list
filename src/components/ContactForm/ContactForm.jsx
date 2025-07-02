@@ -1,5 +1,5 @@
 import './ContactForm.css';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 function ContactForm({
     currentContact,
@@ -11,9 +11,9 @@ function ContactForm({
         ...currentContact,
     });
 
-    if (currentFormContact.id !== currentContact.id) {
+    useEffect(() => {
         setCurrentFormContact({...currentContact});
-    }
+    }, [currentContact]);
 
     function onInputChange(e) {
         setCurrentFormContact({
