@@ -16,16 +16,20 @@ function ContactForm({
     }, [currentContact]);
 
     function onInputChange(e) {
-        setCurrentFormContact({
-            ...currentFormContact,
-            [e.target.name]: e.target.value,
+        setCurrentFormContact(prevFormContact => {
+            return {
+                ...prevFormContact,
+                [e.target.name]: e.target.value,
+            };
         });
     }
 
     function clearContactField(e) {
-        setCurrentFormContact({
-            ...currentFormContact,
-            [e.target.parentElement.querySelector('input').name]: '',
+        setCurrentFormContact(prevFormContact => {
+            return {
+                ...prevFormContact,
+                [e.target.parentElement.querySelector('input').name]: '',
+            };
         });
     }
 

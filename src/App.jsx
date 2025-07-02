@@ -43,8 +43,8 @@ function App() {
     }
 
     function editContact(passedContact) {
-        setContacts(
-            contacts.map(contact =>
+        setContacts(prevContacts =>
+            prevContacts.map(contact =>
                 contact.id === passedContact.id ? passedContact : contact
             )
         );
@@ -56,7 +56,7 @@ function App() {
             id: nanoid(),
         };
 
-        setContacts([...contacts, newContact]);
+        setContacts(prevContacts => [...prevContacts, newContact]);
         exitEditMode();
     }
 
@@ -67,7 +67,9 @@ function App() {
             exitEditMode();
         }
 
-        setContacts(contacts.filter(contact => contact.id !== deleteId));
+        setContacts(prevContacts =>
+            prevContacts.filter(contact => contact.id !== deleteId)
+        );
     }
 
     function enterEditMode(passedId) {
