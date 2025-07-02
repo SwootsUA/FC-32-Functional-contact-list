@@ -45,7 +45,7 @@ function App() {
     function editContact(passedContact) {
         setContacts(
             contacts.map(contact =>
-                contact.id === currentContact.id ? passedContact : contact
+                contact.id === passedContact.id ? passedContact : contact
             )
         );
     }
