@@ -7,6 +7,8 @@ li {
     border-radius: 4px;
     padding: 5px;
     padding-right: 25px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .delete-user-btn {

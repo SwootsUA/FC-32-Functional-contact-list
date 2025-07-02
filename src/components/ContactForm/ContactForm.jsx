@@ -53,7 +53,6 @@ function ContactForm({
                     <input
                         type="text"
                         placeholder="First name"
-                        maxLength={25}
                         name="firstName"
                         onChange={onInputChange}
                         value={currentFormContact.firstName}
@@ -71,7 +70,6 @@ function ContactForm({
                     <input
                         type="text"
                         placeholder="Last name"
-                        maxLength={25}
                         name="lastName"
                         onChange={onInputChange}
                         value={currentFormContact.lastName}
