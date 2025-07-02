@@ -1,8 +1,6 @@
 import ListItem from '../ListItem/ListItem';
 import './ContactList.css';
 
-import React from 'react';
-
 function ContactList({contacts, enterEditMode, deleteContact}) {
     return (
         <div className="scroll-box">
