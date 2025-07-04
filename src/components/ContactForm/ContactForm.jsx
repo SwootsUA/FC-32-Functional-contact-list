@@ -1,5 +1,6 @@
 import './ContactForm.css';
 import {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 
 function ContactForm({
     currentContact,
@@ -138,5 +139,9 @@ function ContactForm({
         </form>
     );
 }
+
+ContactForm.propTypes = {
+    saveContact: PropTypes.func.isRequired,
+};
 
 export default ContactForm;

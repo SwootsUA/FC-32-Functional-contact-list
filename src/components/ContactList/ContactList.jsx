@@ -1,5 +1,6 @@
 import ListItem from '../ListItem/ListItem';
 import './ContactList.css';
+import PropTypes from 'prop-types';
 
 function ContactList({contacts, enterEditMode, deleteContact}) {
     return (
@@ -17,5 +18,13 @@ function ContactList({contacts, enterEditMode, deleteContact}) {
         </div>
     );
 }
+
+ContactList.defaultProps = {
+    contacts: [],
+};
+
+ContactList.propTypes = {
+    contacts: PropTypes.array,
+};
 
 export default ContactList;
