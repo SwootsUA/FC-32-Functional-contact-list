@@ -1,6 +1,6 @@
-import './ContactForm.css';
 import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import './ContactForm.css';
 
 function ContactForm({
     currentContact,

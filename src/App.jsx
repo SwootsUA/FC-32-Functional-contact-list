@@ -1,8 +1,9 @@
-import {useState, useEffect, useRef} from 'react';
-import './App.css';
+import {useState, useEffect} from 'react';
+import {nanoid} from 'nanoid';
 import ContactList from './components/ContactList/ContactList';
 import ContactForm from './components/ContactForm/ContactForm';
-import {nanoid} from 'nanoid';
+import api from './api/contacts-service';
+import './App.css';
 
 const EMPTY_CONTACT = {
     id: '',
@@ -15,24 +16,14 @@ const EMPTY_CONTACT = {
 function App() {
     const [currentContact, setCurrentContact] = useState({...EMPTY_CONTACT});
     const [contacts, setContacts] = useState([]);
-    const isInitialMount = useRef(true);
 
     useEffect(() => {
-        const localContacts = JSON.parse(localStorage.getItem('contacts'));
-
-        if (localContacts) {
-            setContacts(localContacts);
-        }
+        api.get('/').then(({data}) => {
+            if (data) {
+                setContacts(data);
+            }
+        });
     }, []);
-
-    useEffect(() => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-            // Do not run on mount to not clear up the localStorage
-            return;
-        }
-        localStorage.setItem('contacts', JSON.stringify(contacts));
-    }, [contacts]);
 
     function saveContact(passedContact) {
         if (passedContact.id) {
@@ -43,33 +34,47 @@ function App() {
     }
 
     function editContact(passedContact) {
-        setContacts(prevContacts =>
-            prevContacts.map(contact =>
-                contact.id === passedContact.id ? passedContact : contact
-            )
-        );
+        api.put(`/${passedContact.id}`, passedContact)
+            .then(({data}) => {
+                setContacts(
+                    contacts.map(contact =>
+                        contact.id === passedContact.id ? data : contact
+                    )
+                );
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
 
     function addContact(passedContact) {
-        const newContact = {
-            ...passedContact,
-            id: nanoid(),
-        };
+        passedContact.id = nanoid();
 
-        setContacts(prevContacts => [...prevContacts, newContact]);
+        api.post('/', passedContact)
+            .then(({data}) => {
+                setContacts(prevContacts => [...prevContacts, data]);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
         exitEditMode();
     }
 
     function deleteContact(passedId) {
         const deleteId = passedId ? passedId : currentContact.id;
-
-        if (deleteId === currentContact.id) {
-            exitEditMode();
-        }
-
-        setContacts(prevContacts =>
-            prevContacts.filter(contact => contact.id !== deleteId)
-        );
+        api.delete(`/${deleteId}`)
+            .then(() => {
+                setContacts(prevContacts =>
+                    prevContacts.filter(contact => contact.id !== deleteId)
+                );
+                if (deleteId === currentContact.id) {
+                    exitEditMode();
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
 
     function enterEditMode(passedId) {

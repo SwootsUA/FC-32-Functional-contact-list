@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import ListItem from '../ListItem/ListItem';
 import './ContactList.css';
-import PropTypes from 'prop-types';
 
 function ContactList({contacts, enterEditMode, deleteContact}) {
     return (
