@@ -3,7 +3,7 @@ li {
     list-style: none;
     text-align: start;
     margin-bottom: 5px;
-    border: 2px solid #444;
+    border: 2px solid var(--color-surface-secondary);
     border-radius: 4px;
     padding: 5px;
     padding-right: 25px;
@@ -20,4 +20,9 @@ li {
     height: 20px;
     border-radius: 5px;
     padding: 0;
+}
+
+.active {
+    border: 2px solid var(--color-accent-primary);
+    background-color: var(--color-surface-secondary);
 }

@@ -1,8 +1,11 @@
 import './ListItem.css';
 
-function ListItem({contact, enterEditMode, deleteContact}) {
+function ListItem({selected, contact, enterEditMode, deleteContact}) {
     return (
-        <li onDoubleClick={() => enterEditMode(contact.id)}>
+        <li
+            className={selected ? 'active' : ''}
+            onDoubleClick={() => enterEditMode(contact.id)}
+        >
             {`${contact.firstName} ${contact.lastName}`}
             <button
                 className="delete-user-btn"

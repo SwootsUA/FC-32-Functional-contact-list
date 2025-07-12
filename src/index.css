@@ -15,6 +15,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --color-surface-secondary: #444;
+  --color-accent-primary: gray;
 }
 
 a {
@@ -62,6 +65,8 @@ button:focus-visible {
   :root {
     color: #213547;
     background-color: #ffffff;
+
+    --color-surface-secondary: lightgray;
   }
   a:hover {
     color: #747bff;

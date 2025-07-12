@@ -93,6 +93,7 @@ function App() {
 
             <ContactList
                 contacts={contacts}
+                selectedId={currentContact.id}
                 enterEditMode={enterEditMode}
                 deleteContact={deleteContact}
             />

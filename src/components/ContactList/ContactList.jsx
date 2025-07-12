@@ -2,12 +2,13 @@ import PropTypes from 'prop-types';
 import ListItem from '../ListItem/ListItem';
 import './ContactList.css';
 
-function ContactList({contacts, enterEditMode, deleteContact}) {
+function ContactList({selectedId, contacts, enterEditMode, deleteContact}) {
     return (
         <div className="scroll-box">
             <ul>
                 {contacts.map(contact => (
                     <ListItem
+                        selected={selectedId === contact.id}
                         contact={contact}
                         enterEditMode={enterEditMode}
                         key={contact.id}
